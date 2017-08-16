@@ -7,8 +7,9 @@ $(document).ready(function(){
 
   socket.on('message', function(message){
     console.log('New message:' + message.text);
+    var momentTimestamp = moment.utc(message.timestamp);
 
-    $('#messages').append('<p>' + message.text + '</p>');
+    $('#messages').append('<p><strong>'+ momentTimestamp.local().format('h:mm a') + ':</strong> ' + message.text + '</p>');
   });
 
 
@@ -17,7 +18,10 @@ $(document).ready(function(){
 
     var $message = $(this).find('input[name=message]');
 
-    socket.emit('message', {text: $message.val()});
+    socket.emit('message', {
+      text: $message.val(),
+      time: moment().valueOf()
+    });
 
     $message.val('');
   });
