@@ -8,6 +8,11 @@ $(document).ready(function(){
 
   socket.on('connect', function() {
     console.log('Connected socket.io successful');
+
+    socket.emit('joinRoom', {
+      name: name,
+      room: room,
+    });
   });
 
   socket.on('message', function(message){
