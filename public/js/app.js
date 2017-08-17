@@ -2,6 +2,8 @@ $(document).ready(function(){
   var name = getQueryVariable('name') || 'Anonymous';
   var room = getQueryVariable('room');
 
+  $('.room-title').text(room);
+
   var socket = io();
 
   socket.on('connect', function() {
