@@ -7,6 +7,28 @@ var moment = require('moment');
 
 var clientInfo = {};
 
+function getCurrentUsers(socket){
+  var currentUser = clientInfo[socket.id];
+  var users = [];
+
+  if (typeof currentUser == 'undefined') {
+    return;
+  }
+
+  Object.keys(clientInfo).forEach(function (socketId){
+    var userInfo = clientInfo[socketId];
+    if (userInfo.room == currentUser.room) {
+      users.push(userInfo.name)
+    }
+  });
+
+  socket.emit('message', {
+    text: 'Current users: ' + users.join(', '),
+    name: 'System',
+    time: moment().valueOf()
+  })
+}
+
 app.use(express.static(__dirname + '/public'));
 
 io.on('connection', function(socket){
@@ -39,7 +61,11 @@ io.on('connection', function(socket){
   socket.on('message', function(message){
     console.log('Message received:' + message.text);
 
-    io.to(clientInfo[socket.id].room).emit('message', message);
+    if (message.text == "@currentUser") {
+      getCurrentUsers(socket);
+    } else {
+      io.to(clientInfo[socket.id].room).emit('message', message);
+    }
   });
 
   socket.emit('message', {
