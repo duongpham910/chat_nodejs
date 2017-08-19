@@ -2,19 +2,42 @@
 <html>
   <head>
     <title>Socket.IO chat</title>
-
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css"
+      integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M"
+      crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/style.css">
   </head>
   <body>
-    <a href="/index.html">Change Setting</a>
-    <h1 class="room-title"></h1>
-    <div id="messages">
-      <!-- Message show in here-->
-    </div>
-    <form action="" id="message-form">
-      <input type="text" name="message" autocomplete="off" />
-      <button>Send</button>
-    </form>
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-md-6 jumbotron">
+          <a href="/index.html">Change Setting</a>
 
+          <h1 class="room-title text-center"></h1>
+
+          <ul id="messages" class="list-group">
+            <!-- Message show in here-->
+          </ul>
+
+
+          <form action="" id="message-form">
+            <div class="form-group">
+              <div class=input-group>
+                <span class="input-group-addon">
+                  <i class="fa fa-comment" aria-hidden="true"></i>
+                </span>
+                <input type="text" name="message" autocomplete="off" class="form-control"/>
+              </div>
+
+            </div>
+
+            <button class="btn btn-primary btn-block">Send</button>
+          </form>
+
+        </div>
+      </div>
+    </div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.3/socket.io.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
